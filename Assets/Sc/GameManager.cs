@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public PlayerMove Player { get; private set; }
     public Vector2 MinPosition { get; private set; }
     public Vector2 MaxPosition { get; private set; }
     [SerializeField]
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
         highScore = PlayerPrefs.GetInt("HIGHSCORE", 0);
         UpdateUI();
         StartCoroutine(EnemySpawn());
+        Player = FindObjectOfType<PlayerMove>();
     }
     public void AddScore(long addScore)
     {

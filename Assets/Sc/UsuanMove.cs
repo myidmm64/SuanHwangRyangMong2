@@ -12,6 +12,10 @@ public class UsuanMove : MonoBehaviour
     private float speed = 30f;
     [SerializeField]
     private float bossUsuanHP = 250f;
+    [SerializeField]
+    private GameObject suanSnipePrefeb = null;
+    [SerializeField]
+    private Transform playerPosition = null;
     private float randomx = 0;
     private float randomy = 0;
     private Collider2D col = null;
@@ -20,7 +24,8 @@ public class UsuanMove : MonoBehaviour
     private bool isDead = false;
     private bool isDamaged = false;
     private long score = 100000;
-
+    private float timer = 0f;
+    private bool timerCheck = false;
 
     void Start()
     {
@@ -54,6 +59,26 @@ public class UsuanMove : MonoBehaviour
     {
         transform.position = Vector2.MoveTowards(
             transform.localPosition, new Vector2(randomx, randomy), speed * Time.deltaTime);
+        Timer();
+    }
+    private void Timer()
+    {
+        if (timerCheck) return;
+        timer += Time.deltaTime;
+        if(timer >= 5)
+        {
+            timerCheck = true;
+            StartCoroutine(SuanSniping());
+        }
+    }
+    private IEnumerator SuanSniping()
+    {
+            GameObject suansnipe;
+        suansnipe = Instantiate(suanSnipePrefeb, playerPosition);
+        suansnipe.transform.SetParent(null);
+        yield return new WaitForSeconds(1f);
+            timerCheck = false;
+            timer = 0f;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

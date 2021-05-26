@@ -149,9 +149,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NeoMoHaePrefab: {fileID: 5936548577856306582, guid: badefa14fee90d142a8d193d194e52ee, type: 3}
-  Position: {fileID: 4320951663582761279}
+  Position: {fileID: 4320951664570133980}
   speed: 30
   bossUsuanHP: 150
+  suanSnipePrefeb: {fileID: 7833989844832078212, guid: 48815b577d6df2243bcc7e279bbe9664, type: 3}
+  playerPosition: {fileID: 1363406808162110440, guid: a7e208966b77c5947953d31d03d0c88b, type: 3}
 --- !u!50 &4320951664570133952
 Rigidbody2D:
   serializedVersion: 4

@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{B2B58FB2-4462-6B0C-A872-40DD957E5FE0}</ProjectGuid>
+    <ProjectGuid>{8D6A0F16-341E-0DA1-463C-D76FD4B04DD7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -59,9 +59,10 @@
     <Compile Include="Assets\Sc\BulletMove.cs" />
     <Compile Include="Assets\Sc\PlayerMove.cs" />
     <Compile Include="Assets\Sc\UsuanMove.cs" />
+    <Compile Include="Assets\Sc\EnemyMove.cs" />
     <Compile Include="Assets\Sc\PlayerBulletMove.cs" />
     <Compile Include="Assets\Sc\GameManager.cs" />
-    <Compile Include="Assets\Sc\EnemyMove.cs" />
+    <Compile Include="Assets\Sc\SuanSnipingImage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
