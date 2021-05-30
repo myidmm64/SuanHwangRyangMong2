@@ -56,13 +56,17 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Sc\SuanSnipingImage.cs" />
     <Compile Include="Assets\Sc\BulletMove.cs" />
     <Compile Include="Assets\Sc\PlayerMove.cs" />
+    <Compile Include="Assets\Sc\BoomPointMove.cs" />
+    <Compile Include="Assets\Sc\DangerMove.cs" />
+    <Compile Include="Assets\Sc\SuanBulletMove.cs" />
     <Compile Include="Assets\Sc\UsuanMove.cs" />
     <Compile Include="Assets\Sc\EnemyMove.cs" />
     <Compile Include="Assets\Sc\PlayerBulletMove.cs" />
     <Compile Include="Assets\Sc\GameManager.cs" />
-    <Compile Include="Assets\Sc\SuanSnipingImage.cs" />
+    <Compile Include="Assets\Sc\BoomImageMove.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

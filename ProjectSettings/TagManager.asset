@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bullet
+  - NeoMoHae
+  - Sniping
+  - SuanBullet
+  - GoodItem
+  - WeakEnemy
+  - Boss
   layers:
   - Default
   - TransparentFX

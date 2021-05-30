@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Text textLife = null;
     [SerializeField]
+    private Text textBoomPoint = null;
+    [SerializeField]
     private Text suanLifeText = null;
     [SerializeField]
     private GameObject bossSuanPrefeb = null;
@@ -27,6 +29,15 @@ public class GameManager : MonoBehaviour
     private float suanLife = 250f;
     [SerializeField]
     private GameObject disineyPrefeb = null;
+    [SerializeField]
+    private GameObject bossStartDangerPrefeb = null;
+    [SerializeField]
+    private GameObject BoomPrefeb = null;
+    private float dangerTime = 0f;
+    private bool bossDeadChack = false;
+    private bool bossStart = false;
+    private int boomPoint = 0;
+    public bool booming = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +47,33 @@ public class GameManager : MonoBehaviour
         UpdateUI();
         StartCoroutine(EnemySpawn());
         Player = FindObjectOfType<PlayerMove>();
+    }
+    public void BossStart()
+    {
+        bossStart = true;
+    }
+    public void BossDead()
+    {
+        bossDeadChack = true;
+    }
+    public void BoomPointUP()
+    {
+        boomPoint++;
+        UpdateUI();
+    }
+    public void BoomPointDOWN()
+    {
+        if (boomPoint <= 0) return;
+        if (booming) return;
+        boomPoint--;
+        UpdateUI();
+        Boom();
+        booming = true;
+    }
+    private void Boom()
+    {
+        GameObject boom;
+        boom = Instantiate(BoomPrefeb, new Vector2(0, 0), Quaternion.identity);
     }
     public void AddScore(long addScore)
     {
@@ -49,13 +87,31 @@ public class GameManager : MonoBehaviour
     }
     private void BossSuanCheck()
     {
-        if (bossLive) return;
-        if(score >= 250)
+        if(score >= 50000)
         {
-            GameObject suan;
-            suan = Instantiate(bossSuanPrefeb, new Vector2(0,3),Quaternion.identity);
-            bossLive = true;
+            dangerTime += Time.deltaTime;
+            BossSuanSummon();
         }
+    }
+    private void BossSuanSummon()
+    {
+        if (bossLive) return;
+        StartCoroutine(DangerSummon());
+        bossLive = true;
+    }
+    private IEnumerator DangerSummon()
+    {
+        GameObject danger;
+        danger = Instantiate(bossStartDangerPrefeb, new Vector2(-2f, 1.7f), Quaternion.identity);
+        yield return new WaitForSeconds(4f);
+        SuanSummon();
+
+    }
+    private void SuanSummon()
+    {
+        GameObject suan;
+        suan = Instantiate(bossSuanPrefeb, new Vector2(0, 3), Quaternion.identity);
+
     }
     public void SuanDamaged()
     {
@@ -67,6 +123,7 @@ public class GameManager : MonoBehaviour
         textHighScore.text = string.Format("HIGHSCORE\n{0}", highScore);
         textLife.text = string.Format("LIFE\n{0}", playerLife);
         suanLifeText.text = string.Format("BOSS HP\n{0}", suanLife);
+        textBoomPoint.text = string.Format("BOOM\n{0}", boomPoint);
     }
     private IEnumerator EnemySpawn()
     {
@@ -75,15 +132,11 @@ public class GameManager : MonoBehaviour
 
         while (bossLive == false)
         {
-            spawnDelay = Random.Range(1f, 3f);
+            spawnDelay = Random.Range(0.3f, 0.6f);
             randomX = Random.Range(MinPosition.x, MaxPosition.x);
 
-            for (int i = 0; i < 4; i++)
-            {
                 if (bossLive) break;
                 Instantiate(disineyPrefeb, new Vector2(randomX, 5.2f), Quaternion.identity);
-                yield return new WaitForSeconds(0.3f);
-            }
 
             yield return new WaitForSeconds(spawnDelay);
         }

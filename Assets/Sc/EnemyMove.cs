@@ -10,13 +10,15 @@ public class EnemyMove : MonoBehaviour
     private int hp = 2;
     [SerializeField]
     protected float speed = 15f;
+    [SerializeField]
+    private GameObject boomPointPrefeb = null;
 
-    private bool isDamaged = false;
     protected GameManager gameManager = null;
     private Animator animator = null;
     private Collider2D col = null;
     private SpriteRenderer spriteRenderer = null;
     private bool isDead = false;
+    private int random = 0;
 
     void Start()
     {
@@ -67,8 +69,6 @@ public class EnemyMove : MonoBehaviour
             Destroy(collision.gameObject);
             if (hp > 1)
             {
-                if (isDamaged) return;
-                isDamaged = true;
                 StartCoroutine(Damaged());
                 return;
             }
@@ -84,9 +84,8 @@ public class EnemyMove : MonoBehaviour
     {
         hp--;
         spriteRenderer.material.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.01f);
         spriteRenderer.material.color = Color.white;
-        isDamaged = false;
     }
 
 
@@ -95,6 +94,13 @@ public class EnemyMove : MonoBehaviour
         spriteRenderer.material.color = Color.white;
         col.enabled = false;
         //animator.Play("Explosion");  죽는 애니메이션 넣기
+        random = Random.Range(1, 100);
+        if (random <= 40)
+        {
+            GameObject boomPoint;
+            boomPoint = Instantiate(boomPointPrefeb, gameObject.transform);
+            boomPoint.transform.SetParent(null);
+        }
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }

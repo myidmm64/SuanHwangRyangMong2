@@ -11,6 +11,7 @@ public class PlayerBulletMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        transform.localScale -= new Vector3(0.1f, 0.1f, 0f);
         gameManager = FindObjectOfType<GameManager>();
     }
 

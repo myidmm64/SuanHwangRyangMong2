@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 8579356887649391147}
   - component: {fileID: 1883255310965553043}
   - component: {fileID: 1907492806584760182}
+  - component: {fileID: -180482651732423793}
+  - component: {fileID: 4609932663103337337}
   m_Layer: 0
   m_Name: suansniping 4
-  m_TagString: Untagged
+  m_TagString: Sniping
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: da73ac973d949ab4e87d1ec14dab12e2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -95,3 +97,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25be3ff90e17aca4e9d781231508a434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5.3
+  Player2: {fileID: 9038100367708717678, guid: a7e208966b77c5947953d31d03d0c88b, type: 3}
+  mainCamara: {fileID: 7833989844832078212}
+  shakeRange: 0.0321
+  duration: 0.1
+--- !u!50 &-180482651732423793
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7833989844832078212}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
+--- !u!58 &4609932663103337337
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7833989844832078212}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.005590039, y: -0.0030747945}
+  serializedVersion: 2
+  m_Radius: 0.027819274

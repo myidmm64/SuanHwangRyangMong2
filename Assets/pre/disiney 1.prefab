@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -4017201435337025676}
   m_Layer: 0
   m_Name: disiney 1
-  m_TagString: Untagged
+  m_TagString: WeakEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,9 +97,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cd8b0de0d56a1749a1ec3de1a3019ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 10
-  hp: 2
+  score: 300
+  hp: 10
   speed: 3.5
+  boomPointPrefeb: {fileID: 6620042438868675049, guid: ee9e72d5962899c42bb5a376e591c3ef, type: 3}
 --- !u!50 &8382262209522986887
 Rigidbody2D:
   serializedVersion: 4
