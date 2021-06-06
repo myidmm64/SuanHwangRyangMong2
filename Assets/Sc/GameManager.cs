@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public PoolManager poolManager { get; private set; }
     public PlayerMove Player { get; private set; }
     public Vector2 MinPosition { get; private set; }
     public Vector2 MaxPosition { get; private set; }
@@ -33,14 +34,16 @@ public class GameManager : MonoBehaviour
     private GameObject bossStartDangerPrefeb = null;
     [SerializeField]
     private GameObject BoomPrefeb = null;
-    private float dangerTime = 0f;
-    private bool bossDeadChack = false;
-    private bool bossStart = false;
+    private float randomX = 0f;
+   // private float dangerTime = 0f;
+    public bool bossDeadChack = false;
+    //private bool bossStart = false;
     private int boomPoint = 0;
     public bool booming = false;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        poolManager = FindObjectOfType<PoolManager>();
         MinPosition = new Vector2(-2.3f, -4f);
         MaxPosition = new Vector2(2.3f, 4f);
         highScore = PlayerPrefs.GetInt("HIGHSCORE", 0);
@@ -50,7 +53,7 @@ public class GameManager : MonoBehaviour
     }
     public void BossStart()
     {
-        bossStart = true;
+       // bossStart = true;
     }
     public void BossDead()
     {
@@ -89,7 +92,7 @@ public class GameManager : MonoBehaviour
     {
         if(score >= 50000)
         {
-            dangerTime += Time.deltaTime;
+            //dangerTime += Time.deltaTime;
             BossSuanSummon();
         }
     }
@@ -128,15 +131,15 @@ public class GameManager : MonoBehaviour
     private IEnumerator EnemySpawn()
     {
         float spawnDelay = 0f;
-        float randomX = 0f;
 
         while (bossLive == false)
         {
             spawnDelay = Random.Range(0.3f, 0.6f);
-            randomX = Random.Range(MinPosition.x, MaxPosition.x);
-
-                if (bossLive) break;
-                Instantiate(disineyPrefeb, new Vector2(randomX, 5.2f), Quaternion.identity);
+            randomX = Random.Range(MinPosition.x,MaxPosition.x);
+            if (bossLive) break;
+            GameObject enemy;
+            enemy = Instantiate(disineyPrefeb, new Vector2(randomX,5.5f),Quaternion.identity);
+            enemy.transform.SetParent(null);
 
             yield return new WaitForSeconds(spawnDelay);
         }

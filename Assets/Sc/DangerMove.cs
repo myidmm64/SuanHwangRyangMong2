@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DangerMove : MonoBehaviour
 {
-    private GameManager gameManager = null;
+   // private GameManager gameManager = null;
     // Start is called before the first frame update
     void Start()
     {

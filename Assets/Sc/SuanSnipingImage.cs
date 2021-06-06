@@ -23,7 +23,8 @@ public class SuanSnipingImage : MonoBehaviour
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
-        Player2 = GameObject.Find("Player");
+        Player2 = FindObjectOfType<PlayerMove>().gameObject;
+        //Player2 = GameObject.Find("sangbinplane_0");
         col = GetComponent<Collider2D>();
         col.enabled = false;
     }

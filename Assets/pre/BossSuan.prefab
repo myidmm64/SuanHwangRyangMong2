@@ -148,14 +148,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6762f09140a8a547b43157daccd9070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NeoMoHaePrefab: {fileID: 5936548577856306582, guid: badefa14fee90d142a8d193d194e52ee, type: 3}
+  NeoMoHaePrefab: {fileID: 3564198733220664108, guid: 068dd7a862b091e4884387dbc63703d6, type: 3}
   Position: {fileID: 4320951664570133980}
   speed: 30
   bossUsuanHP: 500
   suanSnipePrefeb: {fileID: 7833989844832078212, guid: 48815b577d6df2243bcc7e279bbe9664, type: 3}
-  playerPosition: {fileID: 1363406808162110440, guid: a7e208966b77c5947953d31d03d0c88b, type: 3}
+  playerPosition: {fileID: 6059226527798999646, guid: 3bbd0893bb6936d4bbb404154fda459b, type: 3}
   machineGunBulletPrefeb: {fileID: 999317594576781896, guid: c2d3851fe1e0d7b4fae2b1bb4f720161, type: 3}
-  Player: {fileID: 9038100367708717678, guid: a7e208966b77c5947953d31d03d0c88b, type: 3}
+  Player: {fileID: 6059226527798999618, guid: 3bbd0893bb6936d4bbb404154fda459b, type: 3}
+  suanDead: 0
+  suanImage1: {fileID: 7108277942500302740, guid: 15b445d260033e844b642149aced272f, type: 3}
 --- !u!50 &4320951664570133952
 Rigidbody2D:
   serializedVersion: 4

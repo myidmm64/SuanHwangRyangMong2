@@ -41,7 +41,7 @@ public class EnemyMove : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (transform.localPosition.y > gameManager.MaxPosition.y + 2f)
+        if (transform.localPosition.y > gameManager.MaxPosition.y + 4f)
         {
             Destroy(gameObject);
         }
@@ -63,13 +63,16 @@ public class EnemyMove : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isDead) return;
-
+        if (collision.CompareTag("BoomImage"))
+        {
+            gameManager.AddScore(score);
+        }
         if (collision.CompareTag("Bullet"))
         {
             Destroy(collision.gameObject);
             if (hp > 1)
             {
-                StartCoroutine(Damaged());
+                Damaged();
                 return;
             }
 
@@ -79,8 +82,29 @@ public class EnemyMove : MonoBehaviour
             StartCoroutine(Dead());
         }
     }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
 
-    private IEnumerator Damaged()
+        if (collision.CompareTag("PilSalBullet"))
+        {
+            if (hp > 1)
+            {
+                Damaged();
+                return;
+            }
+
+            if (isDead) return;
+            isDead = true;
+            gameManager.AddScore(score);
+            StartCoroutine(Dead());
+        }
+    }
+    private void Damaged()
+    {
+        hp--;
+        StartCoroutine(ColorChange());
+    }
+    private IEnumerator ColorChange()
     {
         hp--;
         spriteRenderer.material.color = Color.red;

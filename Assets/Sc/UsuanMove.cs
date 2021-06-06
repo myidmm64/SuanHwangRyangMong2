@@ -31,10 +31,16 @@ public class UsuanMove : MonoBehaviour
     public GameObject Player;
     private bool snipinging = false;
     private bool machineGuning = false;
+    private bool neoMoHaeing = false;
     Coroutine my_Coroutine;
     Coroutine MachineGun;
+    public bool suanDead = false;
+    private Animator animator = null;
+    [SerializeField]
+    private GameObject suanImage1 = null;
     void Start()
     {
+        animator = GetComponent<Animator>();
         my_Coroutine = StartCoroutine(NeoMoHaeShot());
         StartCoroutine(RandomMove());
         gameManager = FindObjectOfType<GameManager>();
@@ -42,36 +48,52 @@ public class UsuanMove : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    
     private IEnumerator NeoMoHaeShot()
     {
         GameObject bullet;
         while (true)
         {
+            if (suanDead) yield break;
+            neoMoHaeing = true;
+            if (machineGuning==true || snipinging==true)
+            {
+                StopCoroutine(my_Coroutine);
+            }
             bullet = Instantiate(NeoMoHaePrefab, Position);
             bullet.transform.SetParent(null);
-            yield return new WaitForSeconds(1f); 
+            yield return new WaitForSeconds(1f);
+            neoMoHaeing = false;
         }
     }
     private IEnumerator MachineGunShot()
     {
-        if (snipinging) { 
-            yield break; }
+        if (snipinging) {
+            yield break;
+        }
         machineGuning = true;
+
         GameObject machineGunBullet;
         for (int i = 0; i < 6; i++)
         {
+            if (suanDead) yield break;
+            if (neoMoHaeing)
+                StopCoroutine(my_Coroutine);
             if (snipinging) {
                 machineGuning = false;
                 yield break; }
             machineGunBullet = Instantiate(machineGunBulletPrefeb, Position);
+            machineGunBullet.transform.SetParent(null);
             yield return new WaitForSeconds(0.25f);
         }
         StopCoroutine(MachineGun);
+        my_Coroutine = StartCoroutine(NeoMoHaeShot());
         machineGuning = false;
         machineGunTimer = 0f;
     }
     private IEnumerator RandomMove()
     {
+        if (suanDead) yield break;
         while (true)
         {
             randomx = Random.Range(-2.3f, 2.3f);
@@ -87,6 +109,7 @@ public class UsuanMove : MonoBehaviour
     }
     private void Move()
     {
+        if (suanDead) return;
         if (snipinging) return;
         if (machineGuning) return;
         transform.position = Vector2.MoveTowards(
@@ -94,6 +117,7 @@ public class UsuanMove : MonoBehaviour
     }
     private void Timer()
     {
+        if (suanDead) return;
         if (timerCheck) return;
         timer += Time.deltaTime;
         if(timer >= 7)
@@ -104,16 +128,20 @@ public class UsuanMove : MonoBehaviour
     }
     private void MachineGunTimer()
     {
+        if (suanDead) return;
         if (machineGuning) return;
         machineGunTimer += Time.deltaTime;
-        if (machineGunTimer >= 4)
+        if (machineGunTimer >= 3.4)
         {
             MachineGun = StartCoroutine(MachineGunShot());
         }
     }
     private IEnumerator SuanSniping()
     {
+        if (suanDead) yield break;
+        if (neoMoHaeing) { 
         StopCoroutine(my_Coroutine);
+    }
         snipinging = true;
             GameObject suansnipe;
         suansnipe = Instantiate(suanSnipePrefeb, new Vector2(0,0),Quaternion.identity);
@@ -134,32 +162,61 @@ public class UsuanMove : MonoBehaviour
             Destroy(collision.gameObject);
             if (bossUsuanHP > 0)
             {
-                StartCoroutine(Damaged());
+                Damaged();
                 return;
             }
 
             if (isDead) return;
             isDead = true;
             gameManager.AddScore(score);
-            StartCoroutine(Dead());
+            Dead();
         }
     }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
 
-    private IEnumerator Damaged()
+        if (collision.CompareTag("PilSalBullet"))
+        {
+            if (bossUsuanHP > 0)
+            {
+                Damaged();
+                Damaged();
+                return;
+            }
+
+            if (isDead) return;
+            isDead = true;
+            gameManager.AddScore(score);
+            Dead();
+        }
+    }
+    public void Damaged()
     {
         bossUsuanHP--;
+        StartCoroutine(ColorChange());
+    }
+    private IEnumerator ColorChange()
+    {
         gameManager.SuanDamaged();
         gameManager.UpdateUI();
         spriteRenderer.material.color = Color.red;
         yield return new WaitForSeconds(0.01f);
         spriteRenderer.material.color = Color.white; 
     }
-
-    private IEnumerator Dead()
+    private void Dead()
     {
+        gameManager.BossDead();
+        suanDead = true;
+        transform.localPosition = new Vector2(0, 3);
         col.enabled = false;
+        animator.Play("suanDead");
+        Invoke("SuanImageSummon", 1.5f);
+        GameObject.Find("sangbinplane_0").GetComponent<PlayerMove>().StopBullet();
         //죽는 애니메이션 실행 -> animator.play~~
-        Destroy(gameObject);
-        yield return new WaitForSeconds(0.01f);
+    }
+    private void SuanImageSummon()
+    {
+        GameObject suanImage;
+        suanImage = Instantiate(suanImage1, new Vector2(-1.5f, 1f), Quaternion.identity);
     }
 }

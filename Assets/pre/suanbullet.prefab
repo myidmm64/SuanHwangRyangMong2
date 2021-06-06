@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7876968884487306904}
   - component: {fileID: 7120682673575029449}
-  - component: {fileID: 2050990242145420606}
+  - component: {fileID: -3181209536591737734}
   m_Layer: 0
   m_Name: suanbullet
   m_TagString: Untagged
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2050990242145420606
+--- !u!114 &-3181209536591737734
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,7 +92,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4451446050853386688}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc302c9459220c043a15d8f82be0fe6b, type: 3}
+  m_Script: {fileID: 11500000, guid: 549a8107de5c65a4c80f0fcd014b5236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  suanBulletSpeed: 30
+  speed: 20
+  gameManager: {fileID: 0}

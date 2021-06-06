@@ -98,8 +98,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5.3
-  Player2: {fileID: 9038100367708717678, guid: a7e208966b77c5947953d31d03d0c88b, type: 3}
+  Player2: {fileID: 6059226527798999618, guid: 3bbd0893bb6936d4bbb404154fda459b, type: 3}
   mainCamara: {fileID: 7833989844832078212}
+  suan: {fileID: 4320951664570133978, guid: 07e7c2a539b6b56489eeafa2d08a5ac3, type: 3}
   shakeRange: 0.0321
   duration: 0.1
 --- !u!50 &-180482651732423793

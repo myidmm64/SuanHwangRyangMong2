@@ -6,12 +6,12 @@ public class PlayerBulletMove : MonoBehaviour
 {
     [SerializeField]
     private float speed = 20f;
+    public bool isBig;
     [SerializeField]
     private GameManager gameManager = null;
     // Start is called before the first frame update
     void Start()
     {
-        transform.localScale -= new Vector3(0.1f, 0.1f, 0f);
         gameManager = FindObjectOfType<GameManager>();
     }
 
@@ -21,7 +21,13 @@ public class PlayerBulletMove : MonoBehaviour
         transform.Translate(Vector2.up * speed * Time.deltaTime);
         if(transform.localPosition.y > gameManager.MaxPosition.y+1.2f)
         {
-            Destroy(gameObject);
+            Despawn();
         }
+    }
+
+    public void Despawn()
+    {
+        transform.SetParent(gameManager.poolManager.transform, false);
+        gameObject.SetActive(false);
     }
 }

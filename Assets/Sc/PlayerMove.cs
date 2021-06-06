@@ -6,40 +6,116 @@ public class PlayerMove : MonoBehaviour
 {
     [SerializeField]
     private float speed = 20f;
-    [SerializeField]
     private float wasdSpeed = 5f;
     [SerializeField]
     private GameObject bulletPosition = null;
     [SerializeField]
-    private GameObject bulletPrefab = null;
+    private GameObject smallBulletPrefab = null;
     private Vector2 targetPosition = Vector2.zero;
     private GameManager gameManager = null;
     [SerializeField]
     private float bulletDelay = 0.01f;
+    [SerializeField]
+    private GameObject pilsalPrefeb = null;
     private bool isDamaged = false;
     private SpriteRenderer spriteRenderer = null;
-    private float cooldown = 0f;
+    //private float cooldown = 0f;
+    public Coroutine bullet1;
+    private float pilsalTimer = 0f;
+    private bool pilsaling = false;
+    public bool deading = false;
     // Start is called before the first frame update
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
-        StartCoroutine(Fire());
+        bullet1 = StartCoroutine(Fire());
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-    private IEnumerator Fire()
+    public IEnumerator Fire()
     {
-        GameObject bullet;
         while (true)
         {
-            bullet = Instantiate(bulletPrefab, new Vector2(bulletPosition.transform.position.x,
-                bulletPosition.transform.position.y),Quaternion.identity);
-            bullet = Instantiate(bulletPrefab, new Vector2(bulletPosition.transform.position.x + 0.4f,
-                bulletPosition.transform.position.y + 0.2f), Quaternion.identity);
-            bullet = Instantiate(bulletPrefab, new Vector2(bulletPosition.transform.position.x - 0.4f,
-                bulletPosition.transform.position.y + 0.2f), Quaternion.identity);
-            bullet.transform.SetParent(null);
+            SpawnOrInstantiate();
             yield return new WaitForSeconds(bulletDelay);
         }
+    }
+    private void SpawnOrInstantiate()
+    {
+        GameObject bullet = null;
+
+        if(gameManager.poolManager.transform.childCount > 6)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                
+                bullet = gameManager.poolManager.transform.GetChild(i).gameObject;
+                bullet.transform.SetParent(bulletPosition.transform, false);
+                bullet.transform.position = bulletPosition.transform.position+new Vector3(0.2f*(i-1),0f,0f);
+                if (i == 1)
+                    bullet.transform.localScale = Vector3.one*1.5f;
+                else
+                    bullet.transform.localScale = Vector3.one;
+                bullet.SetActive(true);
+                bullet.transform.SetParent(null);
+            }
+        }
+        else
+        {
+            bullet = Instantiate(smallBulletPrefab, new Vector2(bulletPosition.transform.position.x,
+                bulletPosition.transform.position.y + 0.7f), Quaternion.identity);
+            bullet.transform.localScale = Vector3.one * 1.5f;
+            bullet = Instantiate(smallBulletPrefab, new Vector2(bulletPosition.transform.position.x + 0.2f,
+                bulletPosition.transform.position.y + 0.3f), Quaternion.identity);
+            bullet = Instantiate(smallBulletPrefab, new Vector2(bulletPosition.transform.position.x - 0.2f,
+                bulletPosition.transform.position.y + 0.3f), Quaternion.identity);
+            bullet.transform.SetParent(null);
+            bullet.transform.localScale = Vector3.one;
+
+        }
+        if (bullet != null) { bullet.transform.SetParent(null); }
+
+    }
+ 
+    public void Pilsal()
+    {
+        if (Input.GetKey(KeyCode.R))
+        {
+            wasdSpeed = 1f;
+            if (deading)
+                pilsalTimer = 0f;
+            pilsalTimer += Time.deltaTime;
+            if (pilsalTimer >= 2f)
+            {
+                if (pilsaling) return;
+                pilsalTimer = 0f;
+                StartCoroutine(pilsalBoom());
+            }
+        }
+        else
+        {
+            wasdSpeed = 5f;
+            pilsalTimer = 0f;
+        }
+    }
+    public void Slow()
+    {
+        wasdSpeed = 1f;
+    }
+    public void NoSlow()
+    {
+        wasdSpeed = 5f;
+    }
+    private IEnumerator pilsalBoom()
+    {
+        StopCoroutine(bullet1);
+        pilsaling = true;
+        GameObject pilsalgi;
+        pilsalgi = Instantiate(pilsalPrefeb, new Vector2(bulletPosition.transform.position.x,
+                bulletPosition.transform.position.y + 0.9f), Quaternion.identity);
+        pilsalgi.transform.SetParent(gameObject.transform);
+        yield return new WaitForSeconds(3f);
+        pilsaling = false;
+        bullet1 = StartCoroutine(Fire());
     }
     
     private void OnTriggerEnter2D(Collider2D collision)
@@ -54,14 +130,15 @@ public class PlayerMove : MonoBehaviour
         {
             gameManager.Dead();
         }
-        if (collision.CompareTag("GoodItem")) return;
+        if (collision.CompareTag("GoodItem")|| collision.CompareTag("BoomImage")) return;
+        if (collision.CompareTag("Bullet")) return;
         isDamaged = true;
         StartCoroutine(Damage());
     }
 
     private IEnumerator Damage()
     {
-
+        deading = true;
         gameManager.Dead();
         for (int i = 0; i < 4; i++)
         {
@@ -71,13 +148,27 @@ public class PlayerMove : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         isDamaged = false;
+        deading = false;
     }
-
+    public void StopBullet()
+    {
+        StopCoroutine(bullet1);
+    }
+    public void StartBullet()
+    {
+        bullet1 = StartCoroutine(Fire());
+    }
 // Update is called once per frame
 void Update()
     {
-        cooldown += Time.deltaTime;
-        if (Input.GetMouseButton(0))
+        Pilsal(); 
+        //TouchMove();
+        WASDMove();
+        LimitCheck();
+
+    }
+    private void TouchMove() { 
+    if (Input.GetMouseButton(0))
         {
             targetPosition =
                 Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -85,33 +176,37 @@ void Update()
             targetPosition.y = Mathf.Clamp(targetPosition.y, gameManager.MinPosition.y - 0.85f, gameManager.MaxPosition.y + 0.85f);
             transform.localPosition =
             Vector2.MoveTowards(transform.localPosition,
-            targetPosition, speed * Time.deltaTime);
+            targetPosition, speed* Time.deltaTime);
         }
-            if (Input.GetKey(KeyCode.W))
-            {
-                transform.Translate(Vector2.up * wasdSpeed * Time.deltaTime);
-
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                transform.Translate(Vector2.down * wasdSpeed * Time.deltaTime);
-
-            }
-            if (Input.GetKey(KeyCode.A))
-            {
-                transform.Translate(Vector2.left * wasdSpeed * Time.deltaTime);
-
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                transform.Translate(Vector2.right * wasdSpeed * Time.deltaTime);
+}
+    private void WASDMove() {
+        if (Input.GetKey(KeyCode.W))
+        {
+            transform.Translate(Vector2.up * wasdSpeed * Time.deltaTime);
 
         }
+        if (Input.GetKey(KeyCode.S))
+        {
+            transform.Translate(Vector2.down * wasdSpeed * Time.deltaTime);
+
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.Translate(Vector2.left * wasdSpeed * Time.deltaTime);
+
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.Translate(Vector2.right * wasdSpeed * Time.deltaTime);
+
+        }
+    }
+    private void LimitCheck() {
         if (Input.GetKey(KeyCode.Space))
         {
             gameManager.BoomPointDOWN();
         }
-            if (transform.localPosition.x > gameManager.MaxPosition.x)
+        if (transform.localPosition.x > gameManager.MaxPosition.x)
         {
             transform.Translate(Vector2.left * wasdSpeed * Time.deltaTime);
         }
@@ -119,14 +214,13 @@ void Update()
         {
             transform.Translate(Vector2.right * wasdSpeed * Time.deltaTime);
         }
-        if (transform.localPosition.y < gameManager.MinPosition.y-0.85)
+        if (transform.localPosition.y < gameManager.MinPosition.y - 0.85)
         {
             transform.Translate(Vector2.up * wasdSpeed * Time.deltaTime);
         }
-        if (transform.localPosition.y > gameManager.MaxPosition.y+0.85)
+        if (transform.localPosition.y > gameManager.MaxPosition.y + 0.85)
         {
             transform.Translate(Vector2.down * wasdSpeed * Time.deltaTime);
         }
-
     }
 }

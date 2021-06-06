@@ -11,6 +11,8 @@ TagManager:
   - GoodItem
   - WeakEnemy
   - Boss
+  - BoomImage
+  - PilSalBullet
   layers:
   - Default
   - TransparentFX
