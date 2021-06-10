@@ -30,7 +30,7 @@ public class SuanImageMove : MonoBehaviour
     private void TextStart()
     {
 
-        SuanTalkText.text = string.Format("김치");
+        SuanTalkText.text = string.Format("크윽... 좀 하는데..?");
     }
     private void Touch()
     {
@@ -43,13 +43,20 @@ public class SuanImageMove : MonoBehaviour
             text2();
         if (touch == 2)
             text3();
+        if (touch == 3)
+            text4();
     }
     private void text2()
     {
-        SuanTalkText.text = string.Format("김도윤");
+        SuanTalkText.text = string.Format("감히 나를 중독에서 벗어나게 하려 하다니..");
     }
     private void text3()
     {
-        SuanTalkText.text = string.Format("이재엽");
+        SuanTalkText.text = string.Format("난 영원한 중독이다!");
+    }
+    private void text4()
+    {
+        gameManager.suandest = true;
+        SuanTalkText.text = string.Format(" ");
     }
 }

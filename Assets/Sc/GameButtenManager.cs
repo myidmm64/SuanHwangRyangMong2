@@ -58,10 +58,10 @@ public class GameButtenManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(slow)
-            GameObject.Find("sangbinplane_0").GetComponent<PlayerMove>().Slow();
-        else if(slow)
-            GameObject.Find("sangbinplane_0").GetComponent<PlayerMove>().NoSlow();
+        if (slow)
+            GameObject.Find("sangbinplane_0").GetComponent<PlayerMove>().bulletDelay = 0.1f;
+        else
+            GameObject.Find("sangbinplane_0").GetComponent<PlayerMove>().bulletDelay = 0.05f;
 
                     Pilsal();
         if (GameObject.Find("sangbinplane_0").GetComponent<PlayerMove>().deading == true)

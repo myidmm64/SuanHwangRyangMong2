@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7108277942500302738}
   - component: {fileID: 7108277942500302739}
+  - component: {fileID: -2625745559427615196}
   m_Layer: 0
   m_Name: SuanFace2-export
   m_TagString: Untagged
@@ -82,3 +83,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-2625745559427615196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7108277942500302740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 958594331997f5c448e4159a04329892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

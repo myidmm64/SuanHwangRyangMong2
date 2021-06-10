@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour
     //private bool bossStart = false;
     private int boomPoint = 0;
     public bool booming = false;
+    public bool suandest = false;
     // Start is called before the first frame update
     void Awake()
     {
@@ -150,8 +152,7 @@ public class GameManager : MonoBehaviour
         UpdateUI();
         if (playerLife <= 0)
         {
-            return;
-        //    SceneManager.LoadScene("GameOver");
+            SceneManager.LoadScene("GameOver");
         }
     }
 

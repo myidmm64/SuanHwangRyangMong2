@@ -13,8 +13,7 @@ public class PlayerMove : MonoBehaviour
     private GameObject smallBulletPrefab = null;
     private Vector2 targetPosition = Vector2.zero;
     private GameManager gameManager = null;
-    [SerializeField]
-    private float bulletDelay = 0.01f;
+    public float bulletDelay = 0.05f;
     [SerializeField]
     private GameObject pilsalPrefeb = null;
     private bool isDamaged = false;
@@ -162,7 +161,7 @@ public class PlayerMove : MonoBehaviour
 void Update()
     {
         Pilsal(); 
-        //TouchMove();
+        TouchMove();
         WASDMove();
         LimitCheck();
 

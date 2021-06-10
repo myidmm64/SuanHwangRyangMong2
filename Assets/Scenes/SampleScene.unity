@@ -799,6 +799,7 @@ MonoBehaviour:
   BoomPrefeb: {fileID: 8417722025349542629, guid: afa66fcf45079764a8298a7aa00a21cd, type: 3}
   bossDeadChack: 0
   booming: 0
+  suandest: 0
 --- !u!4 &1404448774
 Transform:
   m_ObjectHideFlags: 0

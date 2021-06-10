@@ -106,6 +106,7 @@ public class UsuanMove : MonoBehaviour
         Move();
         Timer();
         MachineGunTimer();
+        Desd();
     }
     private void Move()
     {
@@ -218,5 +219,10 @@ public class UsuanMove : MonoBehaviour
     {
         GameObject suanImage;
         suanImage = Instantiate(suanImage1, new Vector2(-1.5f, 1f), Quaternion.identity);
+    }
+    private void Desd()
+    {
+        if (gameManager.suandest)
+            Destroy(gameObject);
     }
 }

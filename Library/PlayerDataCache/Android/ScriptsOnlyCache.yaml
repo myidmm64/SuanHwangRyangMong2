@@ -8,13 +8,17 @@ ScriptsOnlyBuild:
     - EnemyMove
     - GameButtenManager
     - GameManager
+    - GameOverManager
     - PilsalBulletMove
     - PisalMove
     - PlayerBulletMove
     - PlayerMove
     - PoolManager
     - StartManager
+    - StartSuanntro
     - SuanBulletMove
+    - SuanDeadImageMOve
+    - SuanImageMove
     - SuanSnipingImage
     - UsuanMove
     Unity.2D.Animation.Editor.dll:
@@ -37,10 +41,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -56,6 +58,57 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Image
     - UnityEngine.UI.Text
   sceneClasses:
+    Assets/Scenes/GameOver.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 1486}
+    - Class: 114
+      Script: {instanceID: 2084}
+    - Class: 114
+      Script: {instanceID: 2458}
+    - Class: 114
+      Script: {instanceID: 2608}
+    - Class: 114
+      Script: {instanceID: 2778}
+    - Class: 114
+      Script: {instanceID: 2990}
+    - Class: 114
+      Script: {instanceID: 3092}
+    - Class: 114
+      Script: {instanceID: 4716}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 212
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
     Assets/Scenes/SampleScene.unity:
     - Class: 1
       Script: {instanceID: 0}
@@ -90,49 +143,53 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1486}
     - Class: 114
-      Script: {instanceID: 1592}
+      Script: {instanceID: 1550}
     - Class: 114
-      Script: {instanceID: 1624}
+      Script: {instanceID: 1594}
     - Class: 114
-      Script: {instanceID: 1864}
+      Script: {instanceID: 1626}
     - Class: 114
-      Script: {instanceID: 2082}
+      Script: {instanceID: 1866}
     - Class: 114
-      Script: {instanceID: 2408}
+      Script: {instanceID: 2084}
     - Class: 114
-      Script: {instanceID: 2444}
+      Script: {instanceID: 2410}
     - Class: 114
-      Script: {instanceID: 2456}
+      Script: {instanceID: 2446}
     - Class: 114
-      Script: {instanceID: 2514}
+      Script: {instanceID: 2458}
     - Class: 114
-      Script: {instanceID: 2604}
+      Script: {instanceID: 2516}
     - Class: 114
-      Script: {instanceID: 2774}
+      Script: {instanceID: 2608}
     - Class: 114
-      Script: {instanceID: 2890}
+      Script: {instanceID: 2778}
     - Class: 114
-      Script: {instanceID: 2986}
+      Script: {instanceID: 2894}
     - Class: 114
-      Script: {instanceID: 3088}
+      Script: {instanceID: 2990}
     - Class: 114
-      Script: {instanceID: 3226}
+      Script: {instanceID: 3092}
     - Class: 114
-      Script: {instanceID: 3264}
+      Script: {instanceID: 3230}
     - Class: 114
-      Script: {instanceID: 3458}
+      Script: {instanceID: 3268}
     - Class: 114
-      Script: {instanceID: 3574}
+      Script: {instanceID: 3296}
     - Class: 114
-      Script: {instanceID: 3630}
+      Script: {instanceID: 3464}
     - Class: 114
-      Script: {instanceID: 3742}
+      Script: {instanceID: 3580}
     - Class: 114
-      Script: {instanceID: 4114}
+      Script: {instanceID: 3636}
     - Class: 114
-      Script: {instanceID: 4646}
+      Script: {instanceID: 3748}
     - Class: 114
-      Script: {instanceID: 27980}
+      Script: {instanceID: 4044}
+    - Class: 114
+      Script: {instanceID: 4122}
+    - Class: 114
+      Script: {instanceID: 4656}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -171,19 +228,21 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1486}
     - Class: 114
-      Script: {instanceID: 2082}
+      Script: {instanceID: 2084}
     - Class: 114
-      Script: {instanceID: 2456}
+      Script: {instanceID: 2458}
     - Class: 114
-      Script: {instanceID: 2604}
+      Script: {instanceID: 2534}
     - Class: 114
-      Script: {instanceID: 2774}
+      Script: {instanceID: 2608}
     - Class: 114
-      Script: {instanceID: 2986}
+      Script: {instanceID: 2778}
     - Class: 114
-      Script: {instanceID: 3088}
+      Script: {instanceID: 2990}
     - Class: 114
-      Script: {instanceID: 4264}
+      Script: {instanceID: 3092}
+    - Class: 114
+      Script: {instanceID: 4272}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -244,6 +303,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_InputField
+  - hash:
+      serializedVersion: 2
+      Hash: ad21d02db18af0cf1a32c32894602b4c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SuanImageMove
   - hash:
       serializedVersion: 2
       Hash: 71b711096c6c32621c1d4c02310898b7
@@ -408,6 +473,12 @@ ScriptsOnlyBuild:
     className: SuanBulletMove
   - hash:
       serializedVersion: 2
+      Hash: aeac4e783013cf0a3e7557bcbd14228e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: StartSuanntro
+  - hash:
+      serializedVersion: 2
       Hash: cf9f5cf2c3145a37ac07f00e50e460f9
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -486,7 +557,7 @@ ScriptsOnlyBuild:
     className: TestResultRendererCallback
   - hash:
       serializedVersion: 2
-      Hash: 78ba39c281ae392b48c3587b7e59eef3
+      Hash: 52793cef8090a195380bcd7e857f3eba
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: UsuanMove
@@ -562,6 +633,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: ContentSizeFitter
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SuanDeadImageMOve
   - hash:
       serializedVersion: 2
       Hash: caa533b001ae39b864ba8425019e2268
@@ -702,6 +779,12 @@ ScriptsOnlyBuild:
     className: SpriteShapeGeometryCache
   - hash:
       serializedVersion: 2
+      Hash: 814755c93a7dbf9b505999fa01aedb1a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameButtenManager
+  - hash:
+      serializedVersion: 2
       Hash: b424b4eeb810aecb0ff91c62639241e9
     assemblyName: Unity.2D.Animation.Runtime.dll
     namespaceName: UnityEngine.Experimental.U2D.Animation
@@ -762,7 +845,7 @@ ScriptsOnlyBuild:
     className: TMP_Settings
   - hash:
       serializedVersion: 2
-      Hash: 862d4c494295ddf410da77f509411f09
+      Hash: d909836dfce477c0fd0e0512c76424f9
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: StartManager
@@ -772,6 +855,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.2D.Animation.Runtime.dll
     namespaceName: UnityEngine.U2D.Animation
     className: SpriteSkinEntity
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EnemyRandomMove
   - hash:
       serializedVersion: 2
       Hash: 28cfb4bd305dd11c6326cc3ee7c14138
@@ -804,10 +893,16 @@ ScriptsOnlyBuild:
     className: TMP_ScrollbarEventHandler
   - hash:
       serializedVersion: 2
-      Hash: 136b43c4587190e5156d747e9bbe4702
+      Hash: 1c1851fb481f447b56d275e69e12f642
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
+  - hash:
+      serializedVersion: 2
+      Hash: 261e5f1a68ab70d9af31984cf3ecd1d7
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameOverManager
   - hash:
       serializedVersion: 2
       Hash: 8220b46879dc5e37db1b940c938f5744
@@ -838,15 +933,10 @@ ScriptsOnlyBuild:
     assemblyName: Unity.2D.IK.Runtime.dll
     namespaceName: UnityEngine.U2D.IK
     className: FabrikSolver2D
-  - hash:
-      serializedVersion: 2
-      Hash: 814755c93a7dbf9b505999fa01aedb1a
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: GameButtenManager
   platform: 13
   scenePathNames:
-  - Assets/Scenes/SampleScene.unity
-  - Assets/Scenes/SuanDead.unity
   - Assets/Scenes/Start.unity
-  playerPath: "C:/Users/USER/OneDrive/\uBC14\uD0D5 \uD654\uBA74/suanShoot.apk"
+  - Assets/Scenes/SampleScene.unity
+  - Assets/Scenes/GameOver.unity
+  - Assets/Scenes/SuanDead.unity
+  playerPath: D:/suan2/Test.apk
